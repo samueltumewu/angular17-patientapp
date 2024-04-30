@@ -17,5 +17,5 @@ export class PatientModel {
   address?: string;
   suburb?: string;
   state?: string;
-  postCode?: string;
+  postcode?: string;
 }
