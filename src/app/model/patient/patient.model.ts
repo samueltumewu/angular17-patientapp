@@ -11,7 +11,7 @@ export class PatientModel {
   pid?: number;
   firstName?: string;
   lastName?: string;
-  birthDate?: number[];
+  birthDate?: any;
   gender?: string;
   phoneNumber?: string;
   address?: string;

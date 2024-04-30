@@ -6,7 +6,7 @@ import { AddPatientComponent } from './component/add-patient/add-patient.compone
 const routes: Routes = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' },
   { path: 'patients', component: PatientGridComponent },
-  { path: 'addPatient', component: AddPatientComponent }
+  { path: 'save-patient', component: AddPatientComponent }
 ];
 
 @NgModule({

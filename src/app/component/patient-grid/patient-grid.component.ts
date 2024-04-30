@@ -34,6 +34,7 @@ export class PatientGridComponent implements OnInit{
   }
 
   searchByPatientName(): void {
+    this.pageNumber = 0;
     this.patientService.getPageableSearch(this.pageNumber, this.pageSize, this.patientFirstName, this.patientLastName)
       .subscribe({
         next: (data) => {
