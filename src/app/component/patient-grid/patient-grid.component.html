@@ -1,0 +1,25 @@
+<div class="list row">
+    <div class="col-md-12">
+      <h4>Patient List</h4>
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by name"
+          [(ngModel)]="title"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <ul class="list-group">
+        @for (patient of patients; track patient.pid; let i = $index) {
+        <li
+          class="list-group-item"
+        >
+          {{ patient.firstName +" "+ patient.lastName +" "+ patient.birthDate?.at(0)+"-"+patient.birthDate?.at(1)+"-"+patient.birthDate?.at(2) +" from "+ patient.state}}
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+  
