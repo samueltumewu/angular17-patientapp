@@ -12,7 +12,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 })
 export class PatientGridComponent implements OnInit{
   pageNumber: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 5;
   patients?: PatientModel[];
   patientFirstName = ''
   patientLastName = ''
@@ -40,8 +40,20 @@ export class PatientGridComponent implements OnInit{
       });
   }
 
-  searchByPatientName(): void {
+  searchByPatientNameAndResetPageNumberToZero(): void {
     this.pageNumber = 0;
+    this.patientService.getPageableSearch(this.pageNumber, this.pageSize, this.patientFirstName, this.patientLastName)
+      .subscribe({
+        next: (data) => {
+          this.patients = data.content;
+          this.totalPage = data.totalPage;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  searchByPatientName(): void {
     this.patientService.getPageableSearch(this.pageNumber, this.pageSize, this.patientFirstName, this.patientLastName)
       .subscribe({
         next: (data) => {
@@ -110,6 +122,16 @@ export class PatientGridComponent implements OnInit{
     else 
       this.retrievePatientList();
   }
+
+  changePageSize(value:any): void {
+    let numberValue = Number(value);
+		this.pageSize = numberValue;
+    this.pageNumber = 0;
+    if (this.patientFirstName != '' || this.patientLastName != '')
+      this.searchByPatientName();
+    else 
+      this.retrievePatientList();
+	}
 
   //modal bootstrap functions
   openModal(viewUserTemplate: TemplateRef<any>, patient: PatientModel) {

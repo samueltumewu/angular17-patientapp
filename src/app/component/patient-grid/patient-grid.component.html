@@ -7,14 +7,21 @@
           class="form-control col-md-3"
           placeholder="Search by first name"
           [(ngModel)]="patientFirstName"
-          (keyup)="searchByPatientName()"
+          (keyup)="searchByPatientNameAndResetPageNumberToZero()"
+        />
+        <input
+          type="text"
+          class="form-control col-md-1"
+          placeholder="Search by first name"
+          value="and"
+          disabled="true"
         />
         <input
           type="text"
           class="form-control col-md-3"
           placeholder="Search by last name"
           [(ngModel)]="patientLastName"
-          (keyup)="searchByPatientName()"
+          (keyup)="searchByPatientNameAndResetPageNumberToZero()"
         />
         <button class="btn btn-sm btn-warning" routerLink="/add-patient">
           Create
@@ -98,6 +105,12 @@
         >
           Last
       </button>
+      <select #pageSize (change)="changePageSize(pageSize.value)" class="form-select col-md-1" aria-label="Default select example">
+        <option selected>Size</option>
+        <option value=2>2</option>
+        <option value=5>5</option>
+        <option value=10>10</option>
+      </select>
     </div>
 
     <!-- modal section -->

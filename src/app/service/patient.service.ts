@@ -12,18 +12,18 @@ export class PatientService {
   constructor(private http: HttpClient) { }
 
   getPageable(pageNumber: number, pageSize: number): Observable<any> {
-    return this.http.get<any>(`${baseUrl}?page=${pageNumber}&page_size=${pageSize}`);
+    return this.http.get<any>(`${baseUrl}?page=${pageNumber}&size=${pageSize}`);
   }
 
   getPageableSearch(pageNumber: number, pageSize: number, firstName: string, lastName: string): Observable<any> {
     if (firstName != '' && lastName == '') {
-      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&page_size=${pageSize}&first_name=${firstName}`);
+      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&size=${pageSize}&first_name=${firstName}`);
     } else if (firstName == '' && lastName != '') {
-      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&page_size=${pageSize}&last_name=${lastName}`);
+      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&size=${pageSize}&last_name=${lastName}`);
     } else if (firstName != '' && lastName != '') {
-      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&page_size=${pageSize}&first_name=${firstName}&last_name=${lastName}`);
+      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&size=${pageSize}&first_name=${firstName}&last_name=${lastName}`);
     } else {
-      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&page_size=${pageSize}&first_name=${firstName}&last_name=${lastName}`);
+      return this.http.get<any>(`${baseUrl}?page=${pageNumber}&size=${pageSize}&first_name=${firstName}&last_name=${lastName}`);
     }
   }
 
