@@ -1,4 +1,5 @@
 <div>
+    <h3>Create Menu</h3>
     <div class="submit-form">
       @if (!submitted) {
       <div class="form-group">
@@ -7,7 +8,6 @@
           type="text"
           class="form-control"
           id="firstName"
-          required
           [(ngModel)]="patient.firstName"
           name="firstName"
           required
@@ -19,7 +19,6 @@
           type="text"
           class="form-control"
           id="lastName"
-          required
           [(ngModel)]="patient.lastName"
           name="lastName"
           required
@@ -32,7 +31,6 @@
           class="form-control"
           placeholder="yyyy-MM-dd"
           id="birthDate"
-          required
           [(ngModel)]="patient.birthDate"
           name="birthDate"
           required
@@ -44,7 +42,6 @@
           type="text"
           class="form-control"
           id="gender"
-          required
           [(ngModel)]="patient.gender"
           name="gender"
           required
@@ -56,7 +53,6 @@
           type="text"
           class="form-control"
           id="phoneNumber"
-          required
           [(ngModel)]="patient.phoneNumber"
           name="phoneNumber"
           required
@@ -68,7 +64,6 @@
           type="text"
           class="form-control"
           id="address"
-          required
           [(ngModel)]="patient.address"
           name="address"
           required
@@ -80,7 +75,6 @@
           type="text"
           class="form-control"
           id="suburb"
-          required
           [(ngModel)]="patient.suburb"
           name="suburb"
           required
@@ -92,7 +86,6 @@
           type="text"
           class="form-control"
           id="state"
-          required
           [(ngModel)]="patient.state"
           name="state"
           required
@@ -104,7 +97,6 @@
           type="text"
           class="form-control"
           id="postcode"
-          required
           [(ngModel)]="patient.postcode"
           name="postcode"
           required

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { PatientModel } from '../../model/patient/patient.model';
 import { PatientService } from '../../service/patient.service';
+
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-patient-grid',
   templateUrl: './patient-grid.component.html',
-  styleUrl: './patient-grid.component.css'
+  styleUrl: './patient-grid.component.css',
+  providers: [BsModalService],
 })
 export class PatientGridComponent implements OnInit{
   pageNumber: number = 0;
@@ -14,8 +17,12 @@ export class PatientGridComponent implements OnInit{
   patientFirstName = ''
   patientLastName = ''
   totalPage: number = 0;
+  // Modal Edit Mode
+  modalRef!: BsModalRef;
+  patientToEdit!: any;
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, 
+    private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.retrievePatientList();
@@ -58,6 +65,19 @@ export class PatientGridComponent implements OnInit{
       })
   }
 
+  editThisRow(): void {
+    console.log(`UPDATING: ${this.patientToEdit.firstName} with ${this.patientToEdit.pid}`)
+    this.patientService.update(this.patientToEdit.pid, this.patientToEdit)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.refreshList();
+        },
+        error: (e) => console.error(e)
+      })
+    this.exitModal();
+  }
+
   handleNextButton(): void {
     if (this.pageNumber < this.totalPage-1) {
       this.pageNumber++;
@@ -91,6 +111,15 @@ export class PatientGridComponent implements OnInit{
       this.retrievePatientList();
   }
 
+  //modal bootstrap functions
+  openModal(viewUserTemplate: TemplateRef<any>, patient: PatientModel) {
+    this.modalRef = this.modalService.show(viewUserTemplate);
+    this.patientToEdit = patient;
+  }
+  exitModal = (): void => {
+    this.modalRef.hide();
+  };
+
   //utilities
   convertToJSDateFromString(strBirthDate?: number[]): Date {
     let strDate: string = strBirthDate?.at(0) +"-"+ strBirthDate?.at(1) +"-"+ strBirthDate?.at(2);
@@ -103,6 +132,7 @@ export class PatientGridComponent implements OnInit{
     this.patientLastName = ''
     this.totalPage = 0;
     this.retrievePatientList();
+    this.patientToEdit = {};
   }
 
 }
