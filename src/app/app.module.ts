@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientGridComponent } from './component/patient-grid/patient-grid.component';
+import { AddPatientComponent } from './component/add-patient/add-patient.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatientGridComponent
+    PatientGridComponent,
+    AddPatientComponent
   ],
   imports: [
     BrowserModule,
