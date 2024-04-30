@@ -41,4 +41,9 @@ export class PatientGridComponent implements OnInit{
         error: (e) => console.error(e)
       });
   }
+
+  convertToJSDateFromString(strBirthDate?: number[]): Date {
+    let strDate: string = strBirthDate?.at(0) +"-"+ strBirthDate?.at(1) +"-"+ strBirthDate?.at(2);
+    return new Date(strDate);
+  }
 }

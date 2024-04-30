@@ -19,15 +19,39 @@
       </div>
     </div>
     <div class="col-md-12">
-      <ul class="list-group">
-        @for (patient of patients; track patient.pid; let i = $index) {
-        <li
-          class="list-group-item"
-        >
-          {{ patient.firstName +" "+ patient.lastName +" "+ patient.birthDate?.at(0)+"-"+patient.birthDate?.at(1)+"-"+patient.birthDate?.at(2) +" from "+ patient.state}}
-        </li>
-        }
-      </ul>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">PID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Suburb</th>
+            <th scope="col">State</th>
+            <th scope="col">Post Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (patient of patients; track patient.pid) 
+          {
+            <tr>
+              <th scope="row">{{ patient.pid }}</th>
+              <td> {{ patient.firstName }} </td>
+              <td> {{ patient.lastName }} </td>
+              <td> {{ convertToJSDateFromString(patient.birthDate) | date }} </td>
+              <td> {{ patient.gender }} </td>
+              <td> {{ patient.phoneNumber }} </td>
+              <td> {{ patient.address }} </td>
+              <td> {{ patient.suburb }} </td>
+              <td> {{ patient.state }} </td>
+              <td> {{ patient.postcode }} </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
   
