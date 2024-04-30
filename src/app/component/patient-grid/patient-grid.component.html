@@ -4,9 +4,17 @@
       <div class="input-group mb-2">
         <input
           type="text"
-          class="form-control"
-          placeholder="Search by name"
-          [(ngModel)]="title"
+          class="form-control col-md-3"
+          placeholder="Search by first name"
+          [(ngModel)]="patientFirstName"
+          (keyup)="searchByPatientName()"
+        />
+        <input
+          type="text"
+          class="form-control col-md-3"
+          placeholder="Search by last name"
+          [(ngModel)]="patientLastName"
+          (keyup)="searchByPatientName()"
         />
       </div>
     </div>

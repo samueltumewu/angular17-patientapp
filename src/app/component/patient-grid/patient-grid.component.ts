@@ -9,9 +9,10 @@ import { PatientService } from '../../service/patient.service';
 })
 export class PatientGridComponent implements OnInit{
   pageNumber: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 10;
   patients?: PatientModel[];
-  title = ''
+  patientFirstName = ''
+  patientLastName = ''
 
   constructor(private patientService: PatientService) {}
 
@@ -21,6 +22,17 @@ export class PatientGridComponent implements OnInit{
 
   retrievePatientList(): void {
     this.patientService.getPageable(this.pageNumber, this.pageSize)
+      .subscribe({
+        next: (data) => {
+          this.patients = data.content;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  searchByPatientName(): void {
+    this.patientService.getPageableSearch(this.pageNumber, this.pageSize, this.patientFirstName, this.patientLastName)
       .subscribe({
         next: (data) => {
           this.patients = data.content;
