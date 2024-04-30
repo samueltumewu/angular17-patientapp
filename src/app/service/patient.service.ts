@@ -35,7 +35,7 @@ export class PatientService {
     return this.http.put(`${baseUrl}/pid/${pid}`, data);
   }
 
-  delete(pid: number): Observable<any> {
-    return this.http.delete(`${baseUrl}/${pid}`);
+  delete(pid: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/pid/${pid}`);
   }
 }

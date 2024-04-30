@@ -45,6 +45,18 @@ export class PatientGridComponent implements OnInit{
       });
   }
 
+  removeThisRow(patient: PatientModel): void {
+    console.log(`DELETING: ${patient.firstName} with ${patient.pid}`)
+    this.patientService.delete(patient.pid)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.refreshList();
+        },
+        error: (e) => console.error(e)
+      })
+  }
+
   handleNextButton(): void {
     if (this.pageNumber < this.totalPage-1) {
       this.pageNumber++;
@@ -83,6 +95,13 @@ export class PatientGridComponent implements OnInit{
     let strDate: string = strBirthDate?.at(0) +"-"+ strBirthDate?.at(1) +"-"+ strBirthDate?.at(2);
     return new Date(strDate);
   }
-
+  refreshList(): void {
+    this.pageNumber = 0;
+    this.pageSize = 10;
+    this.patientFirstName = ''
+    this.patientLastName = ''
+    this.totalPage = 0;
+    this.retrievePatientList();
+  }
 
 }

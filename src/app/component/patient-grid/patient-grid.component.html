@@ -32,6 +32,7 @@
             <th scope="col">Suburb</th>
             <th scope="col">State</th>
             <th scope="col">Post Code</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +49,14 @@
               <td> {{ patient.suburb }} </td>
               <td> {{ patient.state }} </td>
               <td> {{ patient.postcode }} </td>
+              <td> 
+                  <button class="btn btn-sm btn-danger" (click)="removeThisRow(patient)">
+                    DEL
+                  </button>
+                  <button class="btn btn-sm btn-warning">
+                    EDIT
+                  </button>
+               </td>
             </tr>
           }
         </tbody>
