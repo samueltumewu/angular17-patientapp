@@ -13,6 +13,7 @@ export class PatientGridComponent implements OnInit{
   patients?: PatientModel[];
   patientFirstName = ''
   patientLastName = ''
+  totalPage: number = 0;
 
   constructor(private patientService: PatientService) {}
 
@@ -20,11 +21,12 @@ export class PatientGridComponent implements OnInit{
     this.retrievePatientList();
   }
 
-  retrievePatientList(): void {
-    this.patientService.getPageable(this.pageNumber, this.pageSize)
+  retrievePatientList(pageNumber = this.pageNumber, pageSize = this.pageSize): void {
+    this.patientService.getPageable(pageNumber, pageSize)
       .subscribe({
         next: (data) => {
           this.patients = data.content;
+          this.totalPage = data.totalPage;
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -36,14 +38,51 @@ export class PatientGridComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.patients = data.content;
+          this.totalPage = data.totalPage;
           console.log(data);
         },
         error: (e) => console.error(e)
       });
   }
 
+  handleNextButton(): void {
+    if (this.pageNumber < this.totalPage-1) {
+      this.pageNumber++;
+      if (this.patientFirstName != '' || this.patientLastName != '')
+        this.searchByPatientName();
+      else 
+        this.retrievePatientList();
+    } 
+  }
+  handleBackButton(): void {
+    if (this.pageNumber > 0) {
+      this.pageNumber--;
+      if (this.patientFirstName != '' || this.patientLastName != '')
+        this.searchByPatientName();
+      else 
+        this.retrievePatientList();
+    } 
+  }
+  handleFirstButton(): void {
+    this.pageNumber = 0;
+    if (this.patientFirstName != '' || this.patientLastName != '')
+      this.searchByPatientName();
+    else 
+      this.retrievePatientList();
+  }
+  handleLastButton(): void {
+    this.pageNumber = this.totalPage - 1;
+    if (this.patientFirstName != '' || this.patientLastName != '')
+      this.searchByPatientName();
+    else 
+      this.retrievePatientList();
+  }
+
+  //utilities
   convertToJSDateFromString(strBirthDate?: number[]): Date {
     let strDate: string = strBirthDate?.at(0) +"-"+ strBirthDate?.at(1) +"-"+ strBirthDate?.at(2);
     return new Date(strDate);
   }
+
+
 }
