@@ -1,3 +1,9 @@
+# Screenshots
+<img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/e9145c56-d08e-4705-8402-8392dcad3da7" width=600px height=300px/>
+<img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/2eac45e5-d783-4c23-a24f-7440e9f82656" width=600px height=300px/>
+<img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/7797b813-699d-46c5-b4b5-40641bc0f9a1" width=800px height=200px/>
+<img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/7543b930-5497-4905-9287-0ddd8f5d3a96" width=650px height=500px/>
+
 # Angular17Patientapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
