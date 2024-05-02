@@ -1,3 +1,12 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5033de3-4259-4e43-a389-1190efd34efb/deploy-status)](https://app.netlify.com/sites/angular-patient-client/deploys?branch=main)
+
+# Where can I visit the website ?
+- https://angular-patient-client.netlify.app
+- Currently please use chrome or firefox for better experience
+
+# Where is the backend located ?
+- https://github.com/samueltumewu/patientapp
+
 # Screenshots
 <img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/e9145c56-d08e-4705-8402-8392dcad3da7" width=600px height=300px/>
 <img src="https://github.com/samueltumewu/angular17-patientapp/assets/34823485/2eac45e5-d783-4c23-a24f-7440e9f82656" width=600px height=300px/>
