@@ -1,7 +1,7 @@
 <div>
     <h3>Create Menu</h3>
     <div class="submit-form">
-      @if (!submitted) {
+      <form (ngSubmit)="createPatient()" ngNativeValidate >
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input
@@ -37,15 +37,27 @@
         />
       </div>
       <div class="form-group">
-        <label for="gender">Gender</label>
-        <input
+        <label for="gender">Gender</label><br>
+        <select
+          class="form-control"
+          id="gender"
+          [(ngModel)]="patient.gender"
+          name="gender"
+          required
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <!-- <input
           type="text"
           class="form-control"
           id="gender"
           [(ngModel)]="patient.gender"
           name="gender"
           required
-        />
+        /> -->
       </div>
       <div class="form-group">
         <label for="phoneNumber">Phone Number</label>
@@ -102,10 +114,7 @@
           required
         />
       </div>
-      <button (click)="createPatient()" class="btn btn-success">Submit</button>
-      } @else {
-        <h4>Patient {{patient.firstName}} {{patient.lastName}} successfully inserted.</h4>
-        <button (click)="resetForm()" class="btn btn-success">Ok</button>
-      }
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>

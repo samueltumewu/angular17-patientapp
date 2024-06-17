@@ -19,7 +19,6 @@ export class AddPatientComponent {
   state: "",
   postcode: ""
   };
-  submitted = false;
 
   constructor(private patientService: PatientService) {}
 
@@ -27,14 +26,13 @@ export class AddPatientComponent {
     this.patientService.create(this.patient).subscribe({
       next: (res) => {
         console.log(res);
-        this.submitted = true;
+        this.resetForm();
       },
       error: (e) => console.error(e)
     });
   }
 
   resetForm(): void {
-    this.submitted = false;
     this.patient = {
       firstName: "",
       lastName: "",
