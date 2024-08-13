@@ -32,8 +32,8 @@ export class PatientGridComponent implements OnInit{
     this.patientService.getPageable(pageNumber, pageSize)
       .subscribe({
         next: (data) => {
-          this.patients = data.content;
-          this.totalPage = data.totalPage;
+          this.patients = data.data.content;
+          this.totalPage = data.data.totalPage;
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -45,8 +45,8 @@ export class PatientGridComponent implements OnInit{
     this.patientService.getPageableSearch(this.pageNumber, this.pageSize, this.patientFirstName, this.patientLastName)
       .subscribe({
         next: (data) => {
-          this.patients = data.content;
-          this.totalPage = data.totalPage;
+          this.patients = data.data.content;
+          this.totalPage = data.data.totalPage;
           console.log(data);
         },
         error: (e) => console.error(e)
