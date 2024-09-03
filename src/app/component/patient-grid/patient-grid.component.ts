@@ -20,6 +20,8 @@ export class PatientGridComponent implements OnInit{
   // Modal Edit Mode
   modalRef!: BsModalRef;
   patientToEdit!: any;
+  isLoading: boolean = true;
+  isError: boolean = false;
 
   constructor(private patientService: PatientService, 
     private modalService: BsModalService) {}
@@ -35,8 +37,14 @@ export class PatientGridComponent implements OnInit{
           this.patients = data.data.content;
           this.totalPage = data.data.totalPage;
           console.log(data);
+          this.isLoading = false;
+          this.isError = false;
         },
-        error: (e) => console.error(e)
+        error: (e) => {
+          console.error(e)
+          this.isError = true;
+          this.isLoading = false;  
+        }
       });
   }
 

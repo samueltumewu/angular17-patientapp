@@ -1,213 +1,137 @@
 <div class="list row">
-    <div class="col-md-12">
-      <h4>Patient List</h4>
-      <div class="input-group mb-2">
-        <input
-          type="text"
-          class="form-control col-md-3"
-          placeholder="Search by first name"
-          [(ngModel)]="patientFirstName"
-          (keyup)="searchByPatientNameAndResetPageNumberToZero()"
-        />
-        <input
-          type="text"
-          class="form-control col-md-1"
-          placeholder="Search by first name"
-          value="and"
-          disabled="true"
-        />
-        <input
-          type="text"
-          class="form-control col-md-3"
-          placeholder="Search by last name"
-          [(ngModel)]="patientLastName"
-          (keyup)="searchByPatientNameAndResetPageNumberToZero()"
-        />
-        <button class="btn btn-sm btn-warning" routerLink="/add-patient">
-          Create
-        </button>
-        <!-- <li class="nav-item">
-          <a routerLink="/add-patient" class="nav-link">Create</a>
-        </li> -->
-      </div>
+  <div class="col-md-12">
+    <h4>Patient List</h4>
+    <div class="input-group mb-2">
+      <input type="text" class="form-control col-md-3" placeholder="Search by first name" [(ngModel)]="patientFirstName"
+        (keyup)="searchByPatientNameAndResetPageNumberToZero()" />
+      <input type="text" class="form-control col-md-1" placeholder="Search by first name" value="and" disabled="true" />
+      <input type="text" class="form-control col-md-3" placeholder="Search by last name" [(ngModel)]="patientLastName"
+        (keyup)="searchByPatientNameAndResetPageNumberToZero()" />
+      <button class="btn btn-sm btn-warning" routerLink="/add-patient">
+        Create
+      </button>
     </div>
-    <div class="col-md-12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">PID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Birth Date</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Address</th>
-            <th scope="col">Suburb</th>
-            <th scope="col">State</th>
-            <th scope="col">Post Code</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (patient of patients; track patient.pid) 
-          {
-            <tr>
-              <th scope="row">{{ patient.pid }}</th>
-              <td> {{ patient.firstName }} </td>
-              <td> {{ patient.lastName }} </td>
-              <td> {{ convertToJSDateFromString(patient.birthDate) | date }} </td>
-              <td> {{ patient.gender }} </td>
-              <td> {{ patient.phoneNumber }} </td>
-              <td> {{ patient.address }} </td>
-              <td> {{ patient.suburb }} </td>
-              <td> {{ patient.state }} </td>
-              <td> {{ patient.postcode }} </td>
-              <td> 
-                  <button class="btn btn-sm btn-danger" (click)="removeThisRow(patient)">
-                    DEL
-                  </button>
-                  <button class="btn btn-sm btn-warning" (click)="openModal(viewUserTemplate, patient)">
-                    EDIT
-                  </button>
-               </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-    <div class="input-group mb-3">
-      <button
-          class="btn btn-info mr-1"
-          type="button"
-          (click)="handleFirstButton()"
-        >
-          First
-      </button>
-      <button
-          class="btn btn-info mr-1"
-          type="button"
-          (click)="handleBackButton()"
-        >
-          Back
-      </button>
-      <label class="col-form-label me-2 ms-1">Page {{pageNumber+1}} of {{totalPage}}</label>
-      <button
-          class="btn btn-info mr-1"
-          type="button"
-          (click)="handleNextButton()"
-        >
-          Next
-      </button>
-      <button
-          class="btn btn-info mr-1"
-          type="button"
-          (click)="handleLastButton()"
-        >
-          Last
-      </button>
-      <select #pageSize (change)="changePageSize(pageSize.value)" class="form-select col-md-1" aria-label="Default select example">
-        <option selected>Size</option>
-        <option value=2>2</option>
-        <option value=5>5</option>
-        <option value=10>10</option>
-      </select>
-    </div>
-
-    <!-- modal section -->
-    <ng-template #viewUserTemplate>
-      <div class="submit-form">
-        <div class="form-group mr-3 ml-3 mt-3">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            [(ngModel)]="patientToEdit.firstName"
-            name="firstName"
-            disabled="true"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            [(ngModel)]="patientToEdit.lastName"
-            name="lastName"
-            disabled="true"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="birthDate">Birth Date</label><br>
-          <label for="birthDate">{{convertToJSDateFromString(patientToEdit.birthDate) | date}}</label>
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="gender">Gender</label>
-          <input
-            type="text"
-            class="form-control"
-            id="gender"
-            [(ngModel)]="patientToEdit.gender"
-            name="gender"
-            disabled="true"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="phoneNumber">Phone Number</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phoneNumber"
-            [(ngModel)]="patientToEdit.phoneNumber"
-            name="phoneNumber"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="address">Address</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            [(ngModel)]="patientToEdit.address"
-            name="address"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="suburb">Suburb</label>
-          <input
-            type="text"
-            class="form-control"
-            id="suburb"
-            [(ngModel)]="patientToEdit.suburb"
-            name="suburb"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="state">State</label>
-          <input
-            type="text"
-            class="form-control"
-            id="state"
-            [(ngModel)]="patientToEdit.state"
-            name="state"
-          />
-        </div>
-        <div class="form-group mr-3 ml-3">
-          <label for="postcode">Postcode</label>
-          <input
-            type="text"
-            class="form-control"
-            id="postcode"
-            [(ngModel)]="patientToEdit.postcode"
-            name="postcode"
-          />
-        </div>
-        <div class="modalButton mb-3 ml-3">
-          <button (click)="editThisRow()" class="btn btn-success">Update</button>
-        </div>
-      </div>
-    </ng-template>
-
   </div>
-  
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">PID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Birth Date</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Address</th>
+          <th scope="col">Suburb</th>
+          <th scope="col">State</th>
+          <th scope="col">Post Code</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      @if (isLoading) {
+        <h4 style="color: blue;">Loading...</h4>
+      } @else if (isError) {
+        <h4 style="color: red;">Oh no! something's wrong in our server</h4>
+      }
+      <tbody>
+        @for (patient of patients; track patient.pid)
+        {
+        <tr>
+          <th scope="row">{{ patient.pid }}</th>
+          <td> {{ patient.firstName }} </td>
+          <td> {{ patient.lastName }} </td>
+          <td> {{ convertToJSDateFromString(patient.birthDate) | date }} </td>
+          <td> {{ patient.gender }} </td>
+          <td> {{ patient.phoneNumber }} </td>
+          <td> {{ patient.address }} </td>
+          <td> {{ patient.suburb }} </td>
+          <td> {{ patient.state }} </td>
+          <td> {{ patient.postcode }} </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeThisRow(patient)">
+              DEL
+            </button>
+            <button class="btn btn-sm btn-warning" (click)="openModal(viewUserTemplate, patient)">
+              EDIT
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="input-group mb-3">
+    <button class="btn btn-info mr-1" type="button" (click)="handleFirstButton()">
+      First
+    </button>
+    <button class="btn btn-info mr-1" type="button" (click)="handleBackButton()">
+      Back
+    </button>
+    <label class="col-form-label me-2 ms-1">Page {{pageNumber+1}} of {{totalPage}}</label>
+    <button class="btn btn-info mr-1" type="button" (click)="handleNextButton()">
+      Next
+    </button>
+    <button class="btn btn-info mr-1" type="button" (click)="handleLastButton()">
+      Last
+    </button>
+    <select #pageSize (change)="changePageSize(pageSize.value)" class="form-select col-md-1"
+      aria-label="Default select example">
+      <option selected>Size</option>
+      <option value=2>2</option>
+      <option value=5>5</option>
+      <option value=10>10</option>
+    </select>
+  </div>
+
+  <!-- modal section -->
+  <ng-template #viewUserTemplate>
+    <div class="submit-form">
+      <div class="form-group mr-3 ml-3 mt-3">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="patientToEdit.firstName" name="firstName"
+          disabled="true" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="patientToEdit.lastName" name="lastName"
+          disabled="true" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="birthDate">Birth Date</label><br>
+        <label for="birthDate">{{convertToJSDateFromString(patientToEdit.birthDate) | date}}</label>
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="gender">Gender</label>
+        <input type="text" class="form-control" id="gender" [(ngModel)]="patientToEdit.gender" name="gender"
+          disabled="true" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="patientToEdit.phoneNumber"
+          name="phoneNumber" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="patientToEdit.address" name="address" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="suburb">Suburb</label>
+        <input type="text" class="form-control" id="suburb" [(ngModel)]="patientToEdit.suburb" name="suburb" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="state">State</label>
+        <input type="text" class="form-control" id="state" [(ngModel)]="patientToEdit.state" name="state" />
+      </div>
+      <div class="form-group mr-3 ml-3">
+        <label for="postcode">Postcode</label>
+        <input type="text" class="form-control" id="postcode" [(ngModel)]="patientToEdit.postcode" name="postcode" />
+      </div>
+      <div class="modalButton mb-3 ml-3">
+        <button (click)="editThisRow()" class="btn btn-success">Update</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
